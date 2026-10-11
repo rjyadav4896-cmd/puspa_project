@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CampusCare · Student health, connected</title><link rel="stylesheet" href="/static/style.css"><script defer src="/static/app.js"></script></head>
+<body>
+<section id="login-view" class="login-layout" hidden>
+  <div class="login-story"><div class="brand"><span class="brand-icon">✚</span> CampusCare</div><div><span class="eyebrow">A HEALTHIER CAMPUS STARTS HERE</span><h1>Care that keeps<br>students moving.</h1><p>One connected space for your campus health centre.<br>From the first appointment to the next follow-up.</p></div><span>STUDENT HEALTH & WELLBEING · COLLEGE PROJECT</span></div>
+  <div class="login-panel"><form id="login-form"><span class="eyebrow">WELCOME TO CAMPUSCARE</span><h2>Good to see you.</h2><p class="muted">Sign in to manage your campus health centre.</p><label>Username<input name="username" autocomplete="username" required value="admin"></label><label>Password<input name="password" type="password" autocomplete="current-password" required></label><p id="login-error" class="error" role="alert"></p><button class="primary" type="submit">Sign in to your workspace <span>→</span></button><div class="demo-note"><strong>College demonstration</strong><br>Default login: admin / CampusCare123!<br>All sample profiles are fictional.</div></form></div>
+</section>
+<div id="workspace" class="app-layout" hidden>
+  <aside><a class="brand" href="#dashboard"><span class="brand-icon">✚</span> CampusCare</a><span class="sidebar-caption">HEALTH CENTRE</span><nav aria-label="Main navigation">
+    <button data-page="dashboard"><span>◫</span> Overview</button><button data-page="students"><span>♧</span> Students</button><button data-page="appointments"><span>▦</span> Appointments</button><button data-page="doctors"><span>✚</span> Doctors</button><button data-page="prescriptions"><span>▤</span> Prescriptions</button><button data-page="medicines"><span>⊞</span> Medicines</button><button data-page="records"><span>▧</span> Health records</button><button data-page="analytics"><span>▥</span> Analytics</button>
+  </nav><div class="sidebar-bottom"><div class="status-dot"></div> Local campus workspace<small id="store-mode">SQL + document storage</small></div></aside>
+  <div class="main-shell"><header><div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumb">Overview</strong></div><div class="account"><span class="avatar">AD</span><span>Administrator<small>Campus health centre</small></span><button id="logout" class="icon-button" title="Sign out" aria-label="Sign out">↪</button></div></header>
+    <main><div class="page-heading"><div><div id="page-eyebrow" class="eyebrow">YOUR CAMPUS, AT A GLANCE</div><h1 id="page-title">Health centre overview</h1><p id="page-description" class="muted">A little more connected. A lot more cared for.</p></div><button id="add-button" class="primary">+ New appointment</button></div><div id="page-content" aria-live="polite"></div><footer>CampusCare <span>Thoughtful care. Connected records.</span><span>College project · Fictional demo data</span></footer></main>
+  </div>
+</div>
+<dialog id="form-dialog"><form id="entity-form"><div class="dialog-heading"><div><span class="eyebrow">CAMPUSCARE WORKSPACE</span><h2 id="dialog-title"></h2></div><button type="button" id="close-dialog" class="icon-button" aria-label="Close">×</button></div><div id="form-fields"></div><p id="form-error" class="error" role="alert"></p><div class="dialog-actions"><button type="button" id="cancel-dialog" class="secondary">Cancel</button><button class="primary" type="submit">Save record</button></div></form></dialog>
+<div id="toast" role="status" hidden></div>
+</body></html>
