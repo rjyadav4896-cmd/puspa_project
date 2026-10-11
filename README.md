@@ -49,6 +49,14 @@ The database is `campuscare`, collection `health_records`. A configured but unav
 
 Without `MONGO_URI`, the app stores notes in `data/health_records.json` using atomic replacement and a process-local lock. **This local demo option is a document file, not a NoSQL database server.** It is suitable for a single application process. The interface identifies the active storage mode. Existing JSON notes are not automatically migrated when switching to MongoDB; start with a fresh project data directory for a clean MongoDB demonstration or migrate notes deliberately.
 
+## Deploying the demonstration to Vercel
+
+`app.py` exports a top-level `app = create_app()` WSGI instance for Vercel's Flask detection. Select Flask as the framework and use this directory as the project root. No custom build command is required.
+
+Set `SECRET_KEY` to a long random value in Vercel's environment variables so sessions remain valid across application instances. Set `ADMIN_PASSWORD` to your chosen administrator password. Redeploy after updating the code or environment variables. Set `MONGO_URI` only when using a reachable MongoDB service.
+
+On Vercel (`VERCEL=1`), local data defaults to the temporary directory instead of the read-only deployment directory. **SQLite and JSON data on Vercel are temporary and instance-local**: changes may disappear after a cold start or deployment, and different instances may have different records. This mode is for demonstrations. MongoDB only persists health notes; it does not make the relational SQLite records persistent. Persistent hosting requires a durable SQL backend as well, or a server with persistent storage. `.vercelignore` excludes local databases, session secrets, and development files from CLI uploads.
+
 ## Testing
 
 ```powershell

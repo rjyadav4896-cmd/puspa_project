@@ -1,0 +1,7 @@
+data/
+.venv/
+__pycache__/
+tests/
+*.pyc
+.env
+campuscare-preview.png

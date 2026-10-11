@@ -2,6 +2,7 @@
 import os
 import secrets
 import sqlite3
+import tempfile
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from functools import wraps
@@ -15,7 +16,8 @@ ROOT = Path(__file__).resolve().parent
 
 def create_app(test_config=None):
     app = Flask(__name__)
-    app.config.update(DATA_DIR=str(ROOT / 'data'), SECRET_KEY=os.getenv('SECRET_KEY'),
+    default_data_dir = Path(tempfile.gettempdir()) / 'campuscare' if os.getenv('VERCEL') == '1' else ROOT / 'data'
+    app.config.update(DATA_DIR=os.getenv('DATA_DIR', str(default_data_dir)), SECRET_KEY=os.getenv('SECRET_KEY'),
                       MONGO_URI=os.getenv('MONGO_URI'), SESSION_COOKIE_HTTPONLY=True,
                       SESSION_COOKIE_SAMESITE='Strict', MAX_CONTENT_LENGTH=128 * 1024)
     if test_config:
@@ -360,5 +362,9 @@ def seed(connection, documents):
                        'tags': ['wellness'], 'author': 'admin'})
 
 
+# WSGI entry point imported by Vercel and other application servers.
+app = create_app()
+
+
 if __name__ == '__main__':
-    create_app().run(host='127.0.0.1', port=int(os.getenv('PORT', '5000')), debug=False)
+    app.run(host='127.0.0.1', port=int(os.getenv('PORT', '5000')), debug=False)
